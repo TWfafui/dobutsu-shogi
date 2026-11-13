@@ -1,4 +1,4 @@
-import {newGame, applyMove} from './engine.js?v=13';
+import {newGame, applyMove} from './engine.js?v=14';
 
 const DEFAULT_CONFIG = Object.freeze({mode:'pvp', level:'medium', first:0});
 const PIECES = new Set(['L','E','G','C','H']);

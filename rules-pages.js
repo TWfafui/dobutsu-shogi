@@ -1,4 +1,4 @@
-import {directions} from './engine.js?v=13';
+import {directions} from './engine.js?v=14';
 
 export const RULE_PAGE_COUNT = 4;
 

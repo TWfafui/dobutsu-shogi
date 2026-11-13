@@ -1,4 +1,4 @@
-import {applyMove} from './engine.js?v=13';
+import {applyMove} from './engine.js?v=14';
 
 // The compact animal-shogi convention uses R (Rooster) for the promoted chick.
 // Piece case follows the actual first mover; board coordinates stay a–c / 1–4.

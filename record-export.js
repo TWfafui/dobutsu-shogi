@@ -1,4 +1,4 @@
-import {buildMoveRecord} from './notation.js?v=13';
+import {buildMoveRecord} from './notation.js?v=14';
 
 const LEVELS = {low:'簡單', medium:'普通', high:'困難'};
 const REASONS = {

@@ -1,6 +1,6 @@
-import {newGame,applyMove} from './engine.js?v=13';
-import {moveNotation} from './notation.js?v=13';
-import {recordDate,recordOutcome,playerIdentity,validateNote} from './record-export.js?v=13';
+import {newGame,applyMove} from './engine.js?v=14';
+import {moveNotation} from './notation.js?v=14';
+import {recordDate,recordOutcome,playerIdentity,validateNote} from './record-export.js?v=14';
 
 const TITLE = "どうぶつしょうぎ · Let's Catch the Lion!";
 const LEGEND = '先手大寫，後手小寫；x 吃子，* 打入，+ 升級。';

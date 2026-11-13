@@ -1,9 +1,9 @@
-import {legalMoves,directions,isAttacked} from './engine.js?v=13';
-import {GameSession} from './session.js?v=13';
-import {buildMoveRecord} from './notation.js?v=13';
-import {RULE_PAGE_COUNT,renderRulesPage} from './rules-pages.js?v=13';
-import {recordDate,recordOutcome,recordTitle,playerIdentity,validateNote,createRecordExport} from './record-export.js?v=13';
-import {parseRecordImport} from './record-import.js?v=13';
+import {legalMoves,directions,isAttacked} from './engine.js?v=14';
+import {GameSession} from './session.js?v=14';
+import {buildMoveRecord} from './notation.js?v=14';
+import {RULE_PAGE_COUNT,renderRulesPage} from './rules-pages.js?v=14';
+import {recordDate,recordOutcome,recordTitle,playerIdentity,validateNote,createRecordExport} from './record-export.js?v=14';
+import {parseRecordImport} from './record-import.js?v=14';
 
 const $=selector=>document.querySelector(selector);
 const names={L:'獅子',E:'大象',G:'長頸鹿',C:'小雞',H:'母雞'};
@@ -11,7 +11,7 @@ const images={L:'lion',E:'elephant',G:'giraffe',C:'chick',H:'hen'};
 const levels={low:'簡單',medium:'普通',high:'困難'};
 const levelDescriptions={low:'適合棋類遊戲新手',medium:'玩過象棋或西洋棋',high:'我是將棋高手玩家'};
 const STORE='pocket-shogi-v2';
-const OFFLINE_CACHE='pocket-shogi-v13';
+const OFFLINE_CACHE='pocket-shogi-v14';
 let saved=null,storageOK=true;
 try{saved=JSON.parse(localStorage.getItem(STORE)||localStorage.getItem('pocket-shogi-v1'));}catch{storageOK=false;}
 const session=new GameSession(saved);
@@ -121,7 +121,7 @@ $('#move-list').addEventListener('click',event=>{
   if(!Number.isInteger(index)||index<0||index>=session.reviewLength)return;
   if(session.reviewAt(index)){render();$('#move-list').querySelector('[aria-current="step"]')?.focus?.({preventScroll:true});}
 });
-$('#notation-help').onclick=()=>showSheet(`<h2>怎麼讀棋譜？</h2><p>棋子字母依當局的先後手區分：<b>先手大寫</b>、<b>後手小寫</b>，不固定為森林隊或天空隊。</p><table class="ai-table"><tbody><tr><td>L / l</td><td>獅子</td></tr><tr><td>E / e</td><td>大象</td></tr><tr><td>G / g</td><td>長頸鹿</td></tr><tr><td>C / c</td><td>小雞</td></tr><tr><td>R / r</td><td>母雞</td></tr></tbody></table><p>座標 a–c 對應棋盤 A–C，排數同為 1–4。<br><code>Gc4-c3</code>：先手長頸鹿 C4 → C3<br><code>lb1-c2</code>：後手獅子 B1 → C2<br><code>Gc3xc2</code>：先手長頸鹿移至 C2 並吃子<br><code>C*b1</code>：從持駒打入小雞至 B1<br><code>Cb2-b1+</code>：小雞走入底線並升級</p><p>每列數字代表實際手數；點選任一列即可查看該手之後的盤面。</p><p class="rule-foot">採用動物將棋常見的英文代數記法，參考 <a href="https://dobutsu.brianhliou.com/" target="_blank" rel="noopener noreferrer">Dōbutsu Shōgi Explorer</a> 的移動、吃子、打入與升級記法，以及 <a href="https://github.com/clausecker/dobutsu" target="_blank" rel="noopener noreferrer">clausecker/dobutsu</a> 的先後手大小寫慣例。</p>`);
+$('#notation-help').onclick=()=>showSheet(`<h2>怎麼讀棋譜？</h2><p>棋子字母依當局的先後手區分：<b>先手大寫</b>、<b>後手小寫</b>，不固定為森林隊或天空隊。</p><table class="ai-table"><tbody><tr><td>L / l</td><td>獅子</td></tr><tr><td>E / e</td><td>大象</td></tr><tr><td>G / g</td><td>長頸鹿</td></tr><tr><td>C / c</td><td>小雞</td></tr><tr><td>R / r</td><td>母雞</td></tr></tbody></table><p>座標 a–c 對應直行 A–C，橫列以 1–4 標示<br><code>Gc4-c3</code>：先手長頸鹿 C4 → C3<br><code>lb1-c2</code>：後手獅子 B1 → C2<br><code>Gc3xc2</code>：先手長頸鹿移至 C2 並吃子<br><code>C*b1</code>：從持駒打入小雞至 B1<br><code>Cb2-b1+</code>：小雞走入底線並升級</p><p>每列數字代表實際手數；點選任一列即可查看該手之後的盤面。</p><p class="rule-foot">採用動物將棋常見的英文代數記法，參考 <a href="https://dobutsu.brianhliou.com/" target="_blank" rel="noopener noreferrer">Dōbutsu Shōgi Explorer</a> 的移動、吃子、打入與升級記法，以及 <a href="https://github.com/clausecker/dobutsu" target="_blank" rel="noopener noreferrer">clausecker/dobutsu</a> 的先後手大小寫慣例。</p>`);
 function fitBoard(){
   if(session.screen==='home')return;
   const layout=$('#board-layout');
@@ -159,7 +159,7 @@ function maybeComputer(){
   if(!session.isComputerTurn||thinking||$('#sheet').open)return;
   thinking=true;render();const id=++taskId,revision=session.revision;
   try{
-    worker=new Worker('./ai-worker.js?v=13',{type:'module'});
+    worker=new Worker('./ai-worker.js?v=14',{type:'module'});
     worker.onmessage=({data})=>{
       // Both the UI request and the live session must still be current.
       if(id!==taskId||revision!==session.revision||!session.isComputerTurn)return;

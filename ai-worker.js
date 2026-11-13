@@ -1,4 +1,4 @@
-import {chooseMove} from './engine.js?v=13';
+import {chooseMove} from './engine.js?v=14';
 
 self.addEventListener('message', ({data}) => {
   const {id,state,level} = data;
